@@ -10,6 +10,7 @@ export interface Category {
   providedIn: 'root'
 })
 export class ChartServiceService {
+  filtroData: Category[] = [];
 
   constructor() { }
 
@@ -31,14 +32,22 @@ export class ChartServiceService {
     },
     {
       category: "Systems",
-      value1: 850,
-      value2: 1230
+      value1: 900,
+      value2: 1500
     }
   ];
 
 
   getData() {
     return this.data;
+  }
+
+  getFilterData() {
+    return this.filtroData;
+  }
+
+  resetFilter() {
+    this.filtroData = [];
   }
 
 }

@@ -1,6 +1,5 @@
-<div class="container">
     <div class="row" style="margin-left: 2%;">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <mat-card>
                     <form [formGroup]="ChartForm">
                         <div class="row">
@@ -38,25 +37,28 @@
                                     </mat-select>
                                 </mat-form-field><br>-->
 
-                                <mat-selection-list #typesOfShoes (selectionChange)="onGroupsChange(typesOfShoes.selectedOptions.selected)">
-                                    <mat-list-option *ngFor="let shoes of typesOfShoes" [value]="shoes">
-                                        {{shoes}}
-                                    </mat-list-option>
-                                </mat-selection-list>
+                                <div id="global">
+                                    <div id="mensajes">
+                                        <mat-selection-list class="texto" #shoes (selectionChange)="onGroupsChange(shoes.selectedOptions.selected)">
+                                            <mat-list-option *ngFor="let shoes of typesOfShoes" [value]="shoes">
+                                                {{shoes}}
+                                            </mat-list-option>
+                                        </mat-selection-list>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                     </form>
 
-                    <div class="row" >
+                    <div class="row" style="margin-top: 20px;">
                         <button (click)="sendSeries()"  type="submit" mat-button color="primary" >Guardar Filtros</button>
                     </div>
             </mat-card>
         </div>
     </div>
-    <div class="row" style="margin-left: 2%;">
-        <div class="col-md-6">
+    <div class="row" style="margin-left: 2%; margin-top: 20px;">
+        <div class="col-md-12">
             <div id="chartdiv" style="width: 100%; height: 500px;"></div>
         </div>
     </div>
-</div>

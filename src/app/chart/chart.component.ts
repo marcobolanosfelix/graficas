@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject, NgZone, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 // amCharts imports
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
+
 import { MatListOption } from '@angular/material/list';
 import { ChartServiceService } from '../services/chart-service.service';
 
@@ -22,7 +23,7 @@ export class ChartComponent implements OnInit {
   serie2=""
   public datos: any
   categoria:any=""
-  typesOfShoes: string[] =[];
+  typesOfShoes: string[] = [];
 
 
   constructor(
@@ -60,8 +61,7 @@ export class ChartComponent implements OnInit {
       );
 
       // Define data
-      let data = this.chartService.getData();
-     
+      let data = this.chartService.getFilterData();
 
       // Create Y-axis
       let yAxis = chart.yAxes.push(
@@ -89,6 +89,7 @@ export class ChartComponent implements OnInit {
           categoryXField: "category"
         })
       );
+      
       series1.data.setAll(data);
 
       let series2 = chart.series.push(
@@ -135,11 +136,11 @@ export class ChartComponent implements OnInit {
   }
 
   initForm(){
-    this.ChartForm =this.fb.group({//De este formulario activo tomaras los datos que escriban en los campos
+    this.ChartForm = this.fb.group({ //De este formulario activo tomaras los datos que escriban en los campos
       serie1: [''],
       serie2: ['']
     });
-    this.datos=this.chartService.getData();
+    this.datos = this.chartService.getData();
 
     this.datos.forEach((categoria:any) => {
       this.typesOfShoes.push(categoria.category)
@@ -148,8 +149,22 @@ export class ChartComponent implements OnInit {
   }
 
   onGroupsChange(options: MatListOption[]) {
+    this.chartService.resetFilter();
+
     // map these MatListOptions to their values
     console.log(options.map(o => o.value));
+    
+    options.forEach((categorySelected: any) => {
+      //console.log("COMPARANDO 1:"+categorySelected.value);
+      this.datos.forEach((categoryData: any) => {
+       // console.log("COMPARANDO 2:"+categoryData.category);
+        if(categorySelected.value == categoryData.category){
+         // console.log("ENCONTRE UNO IGUAL")
+        this.chartService.filtroData.push(categoryData);
+        }
+      });
+    });
+    console.log("FILTRODATA: " + this.chartService.filtroData);
   }
 
 }

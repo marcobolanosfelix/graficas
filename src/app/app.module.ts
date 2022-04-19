@@ -1,37 +1,40 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChartComponent } from './chart/chart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { MatListOption } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { ScrollbarChartComponent } from './components/scrollbar-chart/scrollbar-chart.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChartComponent
+    ChartComponent,
+    PieChartComponent,
+    ScrollbarChartComponent
   ],
   imports: [
+    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    BrowserModule,
-    FormsModule,
-    MatButtonModule,
-    MatCardModule,
     MatInputModule,
-    MatFormFieldModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatCardModule,
+    MatDatepickerModule,
     MatListModule,
-    MatListOption,
+    MatNativeDateModule,
     MatSelectModule,
-    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
