@@ -12,9 +12,11 @@ export class ScrollbarChartService {
   constructor() { }
 
 
-  crearDatas(start: number, end: number) {
+  crearDatas(start: Date, end: Date) {
     // Generate random data
     var date = new Date();
+    start.setDate(start.getDate() - 1); //Decrementa un día a la fecha inicial ya que se adelanta un día al indicado en el calendario.
+    date = start;
     date.setHours(0, 0, 0, 0);
     var value = 100;
 
@@ -35,7 +37,12 @@ export class ScrollbarChartService {
       return data;
     }
 
-    return generateDatas(end - start);
+    var fechaInicio = new Date(start).getTime();
+    var fechaFin    = new Date(end).getTime();
+    var diff = fechaFin - fechaInicio;
+    var diferencias = diff / (1000*60*60*24);
+
+    return generateDatas(diferencias);
 }
 
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms'
+import { Inject, NgZone, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as am5 from '@amcharts/amcharts5';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
@@ -22,6 +24,8 @@ export class ScrollbarChartComponent implements OnInit {
   });
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any, 
+    private zone: NgZone,
     private scrollbarChartService: ScrollbarChartService
   ) {}
 
@@ -30,7 +34,25 @@ export class ScrollbarChartComponent implements OnInit {
   }
 
   sendGrafica() {
+    this.ngOnDestroy();
     this.crearGrafica();
+  }
+
+  browserOnly(f: () => void) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.zone.runOutsideAngular(() => {
+        f();
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    // Clean up chart when the component is removed
+    this.browserOnly(() => {
+      if (this.root) {
+        this.root.dispose();
+      }
+    });
   }
 
   crearGrafica() {
@@ -70,8 +92,7 @@ export class ScrollbarChartComponent implements OnInit {
 
     //Generar datos desde Service
     var data = this.scrollbarChartService.crearDatas(this.range.value.start, this.range.value.end);
-    //console.log(this.range.value.start)
-    //console.log(this.range.value.end)
+    
 
     // Create series
     function createSeries(name: string, field: any) {
