@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,13 +14,16 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { ScrollbarChartComponent } from './components/scrollbar-chart/scrollbar-chart.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { BuscadorComponent } from './components/buscador/buscador.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChartComponent,
     PieChartComponent,
-    ScrollbarChartComponent
+    ScrollbarChartComponent,
+    BuscadorComponent
   ],
   imports: [
     BrowserModule,
@@ -35,8 +38,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatListModule,
     MatNativeDateModule,
     MatSelectModule,
+    NgMultiSelectDropDownModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule { }

@@ -1,0 +1,42 @@
+<p>buscador works!</p>
+<!-- Buscador -->
+<!-- <div class="search-bar">
+    <input type="text" class="search" placeholder="Buscar país...">
+</div> -->
+
+
+<ng-multiselect-dropdown
+  [placeholder]="'Elige países...'"
+  [settings]="dropdownSettings"
+  [data]="dataPaises"
+  [(ngModel)]="selectedItems"
+  (onSelect)="onItemSelect($event)"
+  (onSelectAll)="onSelectAll($event)"
+>
+</ng-multiselect-dropdown>
+
+
+<!-- <div id="global">
+    <div id="mensajes">
+        <mat-selection-list class="texto" [formControl]="modulos" name="select" #pais id="selectoption" multiple="multiple">
+            <mat-list-option *ngFor="let pais of paisesNames" [value]="pais" [selected]="">
+                {{pais}}
+            </mat-list-option>
+        </mat-selection-list>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" 
+        integrity="sha384-b/
+        U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous">
+</script>
+<script type="text/javascript">
+    $('#selectoption').multiselect({
+      includeSelectAllOption: true,
+      nonSelectedText: 'Selecciona países',
+      enableFiltering: true,
+      buttonWidth: '200px'
+    });
+</script> -->

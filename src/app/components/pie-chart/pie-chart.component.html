@@ -8,22 +8,17 @@
                             
                             <div class="col-md-12">
                                 <h2 style="text-align: center;">Países:</h2>
-                                
-                                <!-- Buscador -->
-                                <div class="search-bar">
-                                    <input type="text" class="search" placeholder="Buscar país..." (keyup)="searchTerm$.next($any($event.target).value)">
-                                </div>
-
-                                <div id="global">
-                                    <div id="mensajes">
-                                        <mat-selection-list class="texto" [formControl]="modulos" #pais (selectionChange)="onGroupsChange(pais.selectedOptions.selected)">
-                                            <mat-list-option *ngFor="let pais of listFiltered" [value]="pais" [selected]="">
-                                                {{pais}}
-                                            </mat-list-option>
-                                        </mat-selection-list>
-                                    </div>
-                                </div>
-                                
+                                <ng-multiselect-dropdown
+                                    [ngModelOptions]="{standalone: true}"
+                                    [placeholder]="'Elige países...'"
+                                    [settings]="dropdownSettings"
+                                    [data]="datos"
+                                    [(ngModel)]="selectedItems"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelect)="onItemDeSelect($event)"
+                                >
+                                </ng-multiselect-dropdown> 
                             </div>
                             <div class="col-md-1"></div>
                         </div>
