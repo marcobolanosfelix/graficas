@@ -1,13 +1,19 @@
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit, Inject, NgZone, PLATFORM_ID } from '@angular/core';
-import { PieChartService } from 'src/app/services/pie-chart.service';
-import { FormBuilder } from '@angular/forms';
+import { Pais, PieChartService } from 'src/app/services/pie-chart.service';
 import { isPlatformBrowser } from '@angular/common';
+import { Subject } from 'rxjs';
 
 import { MatListOption } from '@angular/material/list';
 
 import * as am5 from "@amcharts/amcharts5";
 import * as am5percent from "@amcharts/amcharts5/percent";
 
+interface Ventana {
+  id: number
+  nombre: string
+  seleccionado: boolean  
+}
 
 @Component({
   selector: 'app-pie-chart',
@@ -18,21 +24,55 @@ export class PieChartComponent implements OnInit {
   private root: am5.Root | undefined; 
   public pieChartForm: any;
   public datos: any;
-  paisesNames: string[] = [];
+  paisesNames: string[] = []; 
+  paises: Pais[] = []; //Sustiruirá paisesNames: string[]
+  //Buscador
+  listFiltered: string[] = [];
+  listFilteredBusc: Pais[] = []
+  searchTerm$ = new Subject<string>();
+  auxPaises: string[] = []; //Guarda los paises seleccionados
+  public modulos = new FormControl();
+  public ventanas: any;
 
 
   ngOnInit(): void {
-    //this.crearGrafica();
     this.initForm();
+  }
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any, 
+    private zone: NgZone,
+    private pieChartService: PieChartService,
+    private fb: FormBuilder
+  ) { }
+
+  //Buscador
+  filterList(): void {
+    this.searchTerm$.subscribe(term => {
+      this.listFiltered = this.paisesNames
+        //.map((pais: any) => pais.category)
+        .filter(item => item.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+    });
+    
   }
 
   initForm(){
     this.datos = this.pieChartService.getData();
+    //this.paises = this.pieChartService.getData(); //Toma todo el Data para modificar el campo "seleccionado"
 
     this.datos.forEach((pais: any) => {
-      this.paisesNames.push(pais.category) //Cambiar la variable en caso de fallar
+      this.paisesNames.push(pais.category); //Cambiar la variable en caso de fallar
     });
+
+    //Buscador
+    // this.datos.forEach((pais: any) => {
+    //   this.paises.push(pais); 
+    // });
+
+    this.listFiltered = this.paisesNames;
+    //this.listFilteredBusc = this.paises;
     
+    this.filterList();
   }
 
   // Run the function only in the browser
@@ -53,12 +93,6 @@ export class PieChartComponent implements OnInit {
     });
   }
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: any, 
-    private zone: NgZone,
-    private pieChartService: PieChartService,
-    private fb: FormBuilder
-  ) { }
 
   sendPaises(){
     this.ngOnDestroy();
@@ -105,13 +139,32 @@ export class PieChartComponent implements OnInit {
       this.datos.forEach((categoryData: any) => {
        // console.log("COMPARANDO 2:"+categoryData.category);
         if(categorySelected.value == categoryData.category){
-         // console.log("ENCONTRE UNO IGUAL")
-        this.pieChartService.filtroData.push(categoryData);
+          // console.log("ENCONTRE UNO IGUAL")
+          this.pieChartService.filtroData.push(categoryData);
+          //Buscador
+          categoryData.seleccionado = "true";
+          
+          console.log("VERDADEROS")
+          console.log(categoryData.category + ": " + categoryData.seleccionado)
+          return;
+        } else {
+          categoryData.seleccionado = "false";
+          console.log("FALSOS")
+          console.log(categoryData.category + ": " + categoryData.seleccionado)
+          return;
         }
+        
       });
     });
     console.log("FILTRODATA: " + this.pieChartService.filtroData);
+
+    //Buscador
+    //this.listFiltered = this.auxPaises;
+    this.auxPaises = this.paisesNames;
+    console.log("auxPaises: " + this.auxPaises)
+
   }
+
  
 
 }

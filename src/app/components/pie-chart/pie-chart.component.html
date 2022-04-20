@@ -9,10 +9,15 @@
                             <div class="col-md-12">
                                 <h2 style="text-align: center;">Países:</h2>
                                 
+                                <!-- Buscador -->
+                                <div class="search-bar">
+                                    <input type="text" class="search" placeholder="Buscar país..." (keyup)="searchTerm$.next($any($event.target).value)">
+                                </div>
+
                                 <div id="global">
                                     <div id="mensajes">
-                                        <mat-selection-list class="texto" #pais (selectionChange)="onGroupsChange(pais.selectedOptions.selected)">
-                                            <mat-list-option *ngFor="let pais of paisesNames" [value]="pais">
+                                        <mat-selection-list class="texto" [formControl]="modulos" #pais (selectionChange)="onGroupsChange(pais.selectedOptions.selected)">
+                                            <mat-list-option *ngFor="let pais of listFiltered" [value]="pais" [selected]="">
                                                 {{pais}}
                                             </mat-list-option>
                                         </mat-selection-list>
