@@ -1,10 +1,17 @@
-.menuColor {
+.menuStyle {
     background-color: #3f51b5;
     color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    // position: fixed;
+    margin-bottom: 30px;
+    padding-left: 5%;
+    // text-align: end;
 }
 
-.py {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+a {
+    color: white;
+    font-size: large;
+    margin-right: 75%;
+    text-decoration: none;
 }

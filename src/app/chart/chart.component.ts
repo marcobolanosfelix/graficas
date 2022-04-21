@@ -10,6 +10,7 @@ import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 
 import { MatListOption } from '@angular/material/list';
 import { ChartServiceService } from '../services/chart-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chart',
@@ -17,21 +18,26 @@ import { ChartServiceService } from '../services/chart-service.service';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit {
-  public ChartForm: any
   private root: am5.Root | undefined;
-  serie1=""
-  serie2=""
+  public ChartForm: any
+  public serie1=""
+  public serie2=""
   public datos: any
-  categoria:any=""
-  typesOfShoes: string[] = [];
+  public categoria:any=""
+  public typesOfShoes: string[] = [];
 
+  
+  ngOnInit(): void {
+    this.initForm();
+  }
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any, 
     private zone: NgZone, 
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private chartService: ChartServiceService
   ) { }
+
 
    // Run the function only in the browser
    browserOnly(f: () => void) {
@@ -123,9 +129,6 @@ export class ChartComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.initForm();
-  }
 
   sendSeries(){
     this.serie1 = this.ChartForm.get('serie1').value

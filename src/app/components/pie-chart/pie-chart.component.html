@@ -1,37 +1,39 @@
-<div class="row" style="margin-left: 2%;">
-
+<div class="container">
     <div class="row" style="margin-left: 2%;">
-        <div class="col-md-12">
-            <mat-card>
-                    <form [formGroup]="pieChartForm">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h2 style="text-align: center;">Países:</h2>
-                                <ng-multiselect-dropdown
-                                    [ngModelOptions]="{standalone: true}"
-                                    [placeholder]="'Elige países...'"
-                                    [settings]="dropdownSettings"
-                                    [data]="datos"
-                                    [(ngModel)]="selectedItems"
-                                    (onSelect)="onItemSelect($event)"
-                                    (onSelectAll)="onSelectAll($event)"
-                                    (onDeSelect)="onItemDeSelect($event)"
-                                >
-                                </ng-multiselect-dropdown> 
+
+        <div class="row" style="margin-left: 2%;">
+            <div class="col-md-12">
+                <mat-card>
+                        <form [formGroup]="pieChartForm">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 style="text-align: center;">Países:</h2>
+                                    <ng-multiselect-dropdown
+                                        [ngModelOptions]="{standalone: true}"
+                                        [placeholder]="'Elige países...'"
+                                        [settings]="dropdownSettings"
+                                        [data]="datos"
+                                        [(ngModel)]="selectedItems"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelect)="onItemDeSelect($event)"
+                                    >
+                                    </ng-multiselect-dropdown> 
+                                </div>
+                                <div class="col-md-1"></div>
                             </div>
-                            <div class="col-md-1"></div>
+                        </form>
+    
+                        <div class="row" >
+                            <button (click)="sendPaises()" type="submit" mat-button color="primary" style="margin-top: 20px;">Guardar Filtros</button>
                         </div>
-                    </form>
-
-                    <div class="row" >
-                        <button (click)="sendPaises()" type="submit" mat-button color="primary" style="margin-top: 20px;">Guardar Filtros</button>
-                    </div>
-            </mat-card>
+                </mat-card>
+            </div>
         </div>
-    </div>
-
-
-    <div class="col-md-12" style="margin-top: 20px;">
-        <div id="chart-pie-div" style="width: 100%; height: 500px;"></div>
+    
+    
+        <div class="col-md-12" style="margin-top: 20px;">
+            <div id="chart-pie-div" style="width: 100%; height: 500px;"></div>
+        </div>
     </div>
 </div>
