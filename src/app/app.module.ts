@@ -16,6 +16,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { HomeComponent } from './components/home/home.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ChartComponent,
     PieChartComponent,
     ScrollbarChartComponent,
-    BuscadorComponent
+    BuscadorComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatCardModule,
     MatDatepickerModule,
     MatListModule,
+    MatMenuModule,
     MatNativeDateModule,
     MatSelectModule,
     NgMultiSelectDropDownModule

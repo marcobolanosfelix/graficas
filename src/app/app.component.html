@@ -1,19 +1,12 @@
 <h1 style="margin-left: 50%;">Dashboards dinámicos</h1>
 
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <app-chart></app-chart>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <app-pie-chart></app-pie-chart>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12" style="margin-left: 20px;">
-        <mat-card>
-            <app-scrollbar-chart></app-scrollbar-chart>
-        </mat-card>
-    </div>
+<div class="menuColor py">
+    <button mat-button [matMenuTriggerFor]="aboveMenu">Above</button>
+    <mat-menu #aboveMenu="matMenu" yPosition="above">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+</mat-menu>
 </div>
 
+<router-outlet></router-outlet>
 
